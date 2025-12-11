@@ -1,63 +1,44 @@
-
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 async function main() {
-  console.log('Start seeding ...')
+  // Limpiar datos antiguos (opcional, cuidado en producción)
+  await prisma.venta.deleteMany()
 
-  // Clean up existing data
-  await prisma.sensorReading.deleteMany()
-  await prisma.device.deleteMany()
+  const categorias = ['Electrónica', 'Ropa', 'Hogar', 'Deportes']
+  const regiones = ['Norte', 'Centro', 'Sur', 'Metropolitana']
+  const vendedores = ['Juan', 'Ana', 'Pedro', 'Maria', 'Luisa']
 
-  // Create Devices
-  const device1 = await prisma.device.create({
-    data: {
-      name: 'Sensor Norte 01',
-      type: 'Temperature/Humidity',
-      location: 'Plantación Zona Norte',
-      readings: {
-        create: [
-          { value: 25.5, unit: 'C', latitude: -33.45, longitude: -70.66 },
-          { value: 26.1, unit: 'C', latitude: -33.45, longitude: -70.66 },
-          { value: 24.8, unit: 'C', latitude: -33.45, longitude: -70.66 },
-        ]
-      }
-    }
+  const ventas = []
+
+  // Generar 50 ventas falsas
+  for (let i = 0; i < 50; i++) {
+    const randomCategoria = categorias[Math.floor(Math.random() * categorias.length)]
+    const randomRegion = regiones[Math.floor(Math.random() * regiones.length)]
+    const randomVendedor = vendedores[Math.floor(Math.random() * vendedores.length)]
+
+    // Fecha aleatoria en los últimos 30 días
+    const date = new Date()
+    date.setDate(date.getDate() - Math.floor(Math.random() * 30))
+
+    ventas.push({
+      producto: `Producto ${i + 1}`,
+      categoria: randomCategoria,
+      monto: Math.floor(Math.random() * 50000) + 1000, // Entre 1.000 y 51.000
+      cantidad: Math.floor(Math.random() * 10) + 1,
+      fecha: date,
+      vendedor: randomVendedor,
+      region: randomRegion,
+    })
+  }
+
+  // Insertar en la BD
+  await prisma.venta.createMany({
+    data: ventas,
   })
 
-  const device2 = await prisma.device.create({
-    data: {
-      name: 'GPS Tracker Camión A',
-      type: 'GPS',
-      location: 'Móvil', // Represents a moving asset
-      readings: {
-        create: [
-          { value: 0, unit: 'N/A', latitude: -33.4600, longitude: -70.6600 },
-          { value: 0, unit: 'N/A', latitude: -33.4610, longitude: -70.6610 },
-          { value: 0, unit: 'N/A', latitude: -33.4620, longitude: -70.6620 },
-        ]
-      }
-    }
-  })
-
-    const device3 = await prisma.device.create({
-    data: {
-      name: 'Sensor Sur 05',
-      type: 'Humidity',
-      location: 'Invernadero Sur',
-      readings: {
-        create: [
-            { value: 60.5, unit: '%', latitude: -33.5000, longitude: -70.7000 },
-            { value: 62.0, unit: '%', latitude: -33.5000, longitude: -70.7000 },
-        ]
-      }
-    }
-  })
-
-
-  console.log(`Created devices: ${device1.name}, ${device2.name}, ${device3.name}`)
-  console.log('Seeding finished.')
+  console.log('✅ Base de datos poblada con 50 ventas')
 }
 
 main()

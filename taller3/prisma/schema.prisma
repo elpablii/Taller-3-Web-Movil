@@ -46,3 +46,16 @@ model SensorReading {
   @@map("sensor_readings")
   @@index([deviceId, recordedAt])
 }
+
+model Venta {
+  id          Int      @id @default(autoincrement())
+  producto    String
+  categoria   String   // Para filtrar (ej: Electrónica, Ropa)
+  monto       Float    // Para sumar en gráficos
+  cantidad    Int
+  fecha       DateTime @default(now()) // Para filtrar por rango
+  vendedor    String?
+  region      String?  // Para gráfico de torta por región
+
+  @@map("ventas")
+}
