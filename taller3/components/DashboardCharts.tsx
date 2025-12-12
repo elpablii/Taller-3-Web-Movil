@@ -39,6 +39,11 @@ export default function DashboardCharts() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
+<<<<<<< HEAD
+=======
+
+            {/* 1. Gráfico de barras - Ventas por Categoría */}
+>>>>>>> main
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Ventas por Categoría (Barras)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -53,6 +58,10 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* 2. Gráfico de Lineas - Evolución Temporal */}
+>>>>>>> main
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Evolución Temporal (Líneas)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -67,6 +76,10 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* 3. Gráfico Circular - Distribución por Región */}
+>>>>>>> main
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">
                     Distribución por Región (Torta)
@@ -107,6 +120,10 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* 4. Gráfico de Área - Crecimiento Acumulado */}
+>>>>>>> main
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Crecimiento Acumulado (Área)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -120,6 +137,10 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* 5. Gráfico de radar - Métricas Generales */}
+>>>>>>> main
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100 md:col-span-2 lg:col-span-2">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Métricas Generales (Radar)</h3>
                 <div className="h-[400px]">

@@ -30,6 +30,10 @@ export default function FilterBar() {
     return (
         <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-4 items-center justify-between">
             <div className="flex flex-wrap gap-4 items-center">
+<<<<<<< HEAD
+=======
+                {/* Filtro por Región*/}
+>>>>>>> main
                 <div className="flex flex-col">
                     <label className="text-xs font-semibold text-gray-500 uppercase mb-1">Región</label>
                     <select
@@ -44,6 +48,10 @@ export default function FilterBar() {
                     </select>
                 </div>
 
+<<<<<<< HEAD
+=======
+                {/* Filtro por Categoría*/}
+>>>>>>> main
                 <div className="flex flex-col">
                     <label className="text-xs font-semibold text-gray-500 uppercase mb-1">Categoría</label>
                     <select
@@ -58,6 +66,7 @@ export default function FilterBar() {
                     </select>
                 </div>
 
+<<<<<<< HEAD
                 <div className="flex flex-col">
                     <label className="text-xs font-semibold text-gray-500 uppercase mb-1">Fecha Inicio</label>
                     <input
@@ -77,6 +86,8 @@ export default function FilterBar() {
                         className="border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 font-medium bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none w-40"
                     />
                 </div>
+=======
+>>>>>>> main
             </div>
 
             <button

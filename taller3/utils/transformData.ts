@@ -40,11 +40,16 @@ export const groupByDate = (items: Venta[]) => {
     }
     return acc;
   }, [] as { name: string; value: number; count: number }[]);
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> main
   return grouped.reverse();
 };
 
 export const getCumulativeData = (items: Venta[]) => {
+<<<<<<< HEAD
     const sorted = [...items].sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
     
     let accumulated = 0;
@@ -55,16 +60,29 @@ export const getCumulativeData = (items: Venta[]) => {
         const date = new Date(item.fecha).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit' });
         dailyMap.set(date, (dailyMap.get(date) || 0) + item.monto);
     });
+=======
+  const sorted = [...items].sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
+>>>>>>> main
 
-    const result = [];
-    for (const [date, value] of dailyMap) {
-        accumulated += value;
-        result.push({ name: date, value: accumulated });
-    }
-    return result;
+  let accumulated = 0;
+  const grouped = groupByDate(sorted.reverse());
+
+  const dailyMap = new Map<string, number>();
+  sorted.forEach(item => {
+    const date = new Date(item.fecha).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit' });
+    dailyMap.set(date, (dailyMap.get(date) || 0) + item.monto);
+  });
+
+  const result = [];
+  for (const [date, value] of dailyMap) {
+    accumulated += value;
+    result.push({ name: date, value: accumulated });
+  }
+  return result;
 }
 
 export const getRadarMetrics = (items: Venta[]) => {
+<<<<<<< HEAD
     if (!items.length) return [];
     
     const totalVentas = items.reduce((sum, i) => sum + i.monto, 0);
@@ -78,4 +96,19 @@ export const getRadarMetrics = (items: Venta[]) => {
        { subject: 'Cantidad Prod.', A: totalCantidad * 10, fullMark: 150 },
        { subject: 'Máx. Venta / 10', A: maxVenta / 10, fullMark: 150 },
     ];
+=======
+  if (!items.length) return [];
+
+  const totalVentas = items.reduce((sum, i) => sum + i.monto, 0);
+  const totalCantidad = items.reduce((sum, i) => sum + i.cantidad, 0);
+  const avgTicket = totalVentas / items.length;
+  const maxVenta = Math.max(...items.map(i => i.monto));
+
+  return [
+    { subject: 'Ticket Promedio', A: avgTicket, fullMark: 10000 },
+    { subject: 'Transacciones', A: items.length * 100, fullMark: 150 },
+    { subject: 'Cantidad Prod.', A: totalCantidad * 10, fullMark: 150 },
+    { subject: 'Máx. Venta / 10', A: maxVenta / 10, fullMark: 150 },
+  ];
+>>>>>>> main
 }

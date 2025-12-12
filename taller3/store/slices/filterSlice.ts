@@ -13,7 +13,7 @@ const initialState: FilterState = {
     categoria: '',
     fechaInicio: '',
     fechaFin: '',
-    tipoGrafico: 'line', // Default chart type
+    tipoGrafico: 'line',
 };
 
 const filterSlice = createSlice({

@@ -20,6 +20,7 @@ export default function Home() {
           </p>
         </header>
 
+<<<<<<< HEAD
         <div className="mb-6 flex gap-2 border-b border-gray-200">
           <button
             onClick={() => setActiveTab('dashboard')}
@@ -41,6 +42,12 @@ export default function Home() {
           >
             Gestión de Ventas
           </button>
+=======
+        {/*Contenido del Dashboard*/}
+        <FilterBar />
+        <div className="bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-200">
+          <DashboardCharts />
+>>>>>>> main
         </div>
 
         {activeTab === 'dashboard' ? (
