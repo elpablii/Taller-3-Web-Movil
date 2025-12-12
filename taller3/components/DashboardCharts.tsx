@@ -31,7 +31,6 @@ export default function DashboardCharts() {
         return <div className="p-8 text-center text-red-500">Error: {error}</div>;
     }
 
-    // Transform Data
     const dataByCategory = groupByCategory(items);
     const dataByDate = groupByDate(items);
     const dataByRegion = groupByRegion(items);
@@ -40,8 +39,6 @@ export default function DashboardCharts() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
-
-            {/* 1. Bar Chart - Sales by Category */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Ventas por Categoría (Barras)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -56,7 +53,6 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 2. Line Chart - Sales Over Time */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Evolución Temporal (Líneas)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -71,9 +67,25 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 3. Pie Chart - Sales by Region */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Distribución por Región (Torta)</h3>
+                <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">
+                    Distribución por Región (Torta)
+                    {filters.categoria && !filters.region && (
+                        <span className="block text-xs font-normal text-gray-500 mt-1">
+                            En {filters.categoria}
+                        </span>
+                    )}
+                    {filters.region && !filters.categoria && (
+                        <span className="block text-xs font-normal text-gray-500 mt-1">
+                            En {filters.region}
+                        </span>
+                    )}
+                    {filters.categoria && filters.region && (
+                        <span className="block text-xs font-normal text-gray-500 mt-1">
+                            {filters.categoria} en {filters.region}
+                        </span>
+                    )}
+                </h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                         <Pie
@@ -81,7 +93,7 @@ export default function DashboardCharts() {
                             cx="50%"
                             cy="50%"
                             labelLine={false}
-                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                            label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`}
                             outerRadius={100}
                             fill="#8884d8"
                             dataKey="value"
@@ -95,7 +107,6 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 4. Area Chart - Cumulative Growth */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Crecimiento Acumulado (Área)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -109,7 +120,6 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 5. Radar Chart - Metrics Comparison */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100 md:col-span-2 lg:col-span-2">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Métricas Generales (Radar)</h3>
                 <div className="h-[400px]">
@@ -125,7 +135,6 @@ export default function DashboardCharts() {
                     </ResponsiveContainer>
                 </div>
             </div>
-
         </div>
     );
 }

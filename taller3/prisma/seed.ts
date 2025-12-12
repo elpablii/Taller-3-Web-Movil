@@ -1,9 +1,22 @@
 import { PrismaClient } from '@prisma/client'
+import { Pool } from 'pg'
+import { PrismaPg } from '@prisma/adapter-pg'
+import * as dotenv from 'dotenv'
+import * as path from 'path'
 
-const prisma = new PrismaClient()
+dotenv.config({ path: path.join(__dirname, '../.env') })
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+})
+
+const adapter = new PrismaPg(pool)
+
+const prisma = new PrismaClient({
+    adapter,
+})
 
 async function main() {
-  // Limpiar datos antiguos (opcional, cuidado en producción)
   await prisma.venta.deleteMany()
 
   const categorias = ['Electrónica', 'Ropa', 'Hogar', 'Deportes']
@@ -12,33 +25,29 @@ async function main() {
 
   const ventas = []
 
-  // Generar 50 ventas falsas
   for (let i = 0; i < 50; i++) {
     const randomCategoria = categorias[Math.floor(Math.random() * categorias.length)]
     const randomRegion = regiones[Math.floor(Math.random() * regiones.length)]
     const randomVendedor = vendedores[Math.floor(Math.random() * vendedores.length)]
 
-    // Fecha aleatoria en los últimos 30 días
     const date = new Date()
     date.setDate(date.getDate() - Math.floor(Math.random() * 30))
 
     ventas.push({
       producto: `Producto ${i + 1}`,
       categoria: randomCategoria,
-      monto: Math.floor(Math.random() * 50000) + 1000, // Entre 1.000 y 51.000
+      monto: Math.floor(Math.random() * 50000) + 1000,
       cantidad: Math.floor(Math.random() * 10) + 1,
       fecha: date,
       vendedor: randomVendedor,
       region: randomRegion,
     })
   }
-
-  // Insertar en la BD
   await prisma.venta.createMany({
     data: ventas,
   })
 
-  console.log('✅ Base de datos poblada con 50 ventas')
+  console.log('Base de datos poblada con 50 ventas')
 }
 
 main()

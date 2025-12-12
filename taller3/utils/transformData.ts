@@ -30,7 +30,6 @@ export const groupByRegion = (items: Venta[]) => {
 
 export const groupByDate = (items: Venta[]) => {
   const grouped = items.reduce((acc, item) => {
-    // Format date as DD/MM
     const date = new Date(item.fecha).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit' });
     const existing = acc.find((i) => i.name === date);
     if (existing) {
@@ -42,20 +41,15 @@ export const groupByDate = (items: Venta[]) => {
     return acc;
   }, [] as { name: string; value: number; count: number }[]);
   
-  // Sort by actual date needed? Assuming items come sorted or sort here
-  // Ideally, sorting by date object is better, but simplified for display
-  return grouped.reverse(); // API returns desc, we likely want asc for line chart
+  return grouped.reverse();
 };
 
 export const getCumulativeData = (items: Venta[]) => {
-    // Sort ascending first
     const sorted = [...items].sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
     
     let accumulated = 0;
-    const grouped = groupByDate(sorted.reverse()); // groupByDate expects desc but we want to process asc
+    const grouped = groupByDate(sorted.reverse());
     
-    // Re-calc grouping properly for accumulation
-    // Let's just map date-wise
     const dailyMap = new Map<string, number>();
     sorted.forEach(item => {
         const date = new Date(item.fecha).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit' });
@@ -78,11 +72,9 @@ export const getRadarMetrics = (items: Venta[]) => {
     const avgTicket = totalVentas / items.length;
     const maxVenta = Math.max(...items.map(i => i.monto));
     
-    // Normalize roughly to 100 scale for radar visualization or keep raw
-    // For specific radar, let's compare simple categories or metrics
     return [
        { subject: 'Ticket Promedio', A: avgTicket, fullMark: 10000 },
-       { subject: 'Transacciones', A: items.length * 100, fullMark: 150 }, // scaled up visibility
+       { subject: 'Transacciones', A: items.length * 100, fullMark: 150 },
        { subject: 'Cantidad Prod.', A: totalCantidad * 10, fullMark: 150 },
        { subject: 'Máx. Venta / 10', A: maxVenta / 10, fullMark: 150 },
     ];
