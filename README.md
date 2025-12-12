@@ -212,6 +212,26 @@ Verifica que:
 
 Desde la carpeta `taller3/`, ejecuta el seed de la base de datos con `npx prisma db seed` para crear datos de ejemplo.
 
+### Error: "⚠️ No seed command configured" al ejecutar el seed
+
+Si ves este mensaje, significa que la configuración del seed no está en `prisma.config.ts`. El archivo ya debería tener la configuración correcta, pero si por alguna razón no funciona, verifica que `prisma.config.ts` tenga la propiedad `seed` dentro de `migrations`:
+
+```typescript
+migrations: {
+  path: "prisma/migrations",
+  seed: "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
+}
+```
+
+### Error: "Module '@prisma/client' has no exported member 'PrismaClient'" al ejecutar el seed
+
+Este error ocurre cuando intentas ejecutar `npx prisma db seed` sin haber generado primero el cliente de Prisma. Para solucionarlo:
+
+1. Ejecuta primero `npx prisma generate` para generar el cliente de Prisma
+2. Luego ejecuta `npx prisma db seed` nuevamente
+
+**Nota**: Si ejecutaste `npx prisma migrate dev` en el paso 6, el cliente ya debería estar generado. Este error puede ocurrir si ejecutas el seed directamente sin haber ejecutado las migraciones primero, o si cambiaste el schema de Prisma y no regeneraste el cliente.
+
 ### El puerto 3000 está ocupado
 
 Next.js automáticamente usará otro puerto. Revisa el mensaje en la terminal para ver qué puerto está usando.
