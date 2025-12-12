@@ -9,7 +9,7 @@ Sebastián Pleticosic - 19.307.465-0
 Diego Véliz - 20.797.904-K
 Vicente Araya - 20.797.409-9
 
-## Eesta aplicación permite
+## Esta aplicación permite
 
 - Ver un dashboard con diferentes gráficos que muestran las ventas por categoría, región, evolución temporal, etc.
 - Filtrar las ventas por región o categoría
@@ -32,9 +32,19 @@ Si no tienes PostgreSQL instalado, puedes descargarlo desde su página oficial. 
 
 Si tienes el proyecto en un repositorio, clónalo. Si lo descargaste como ZIP, descomprímelo y abre una terminal en esa carpeta.
 
-### 2. Instalar las dependencias
+**IMPORTANTE**: El proyecto Next.js está dentro de la carpeta `taller3/`. Todos los comandos que se mencionan a continuación deben ejecutarse desde dentro de esa carpeta.
 
-Abre una terminal en la carpeta del proyecto y ejecuta:
+### 2. Entrar a la carpeta del proyecto
+
+Abre una terminal y navega a la carpeta `taller3/`:
+
+```bash
+cd taller3
+```
+
+### 3. Instalar las dependencias
+
+Desde la carpeta `taller3/`, ejecuta:
 
 ```bash
 npm install
@@ -42,7 +52,7 @@ npm install
 
 Esto instalará todas las librerías que necesita el proyecto. Puede tardar un par de minutos la primera vez.
 
-### 3. Configurar la base de datos
+### 4. Configurar la base de datos
 
 Primero, asegúrate de que PostgreSQL esté corriendo en tu computadora. Luego, crea una base de datos nueva. Puedes hacerlo desde la terminal con psql o desde pgAdmin si prefieres una interfaz gráfica.
 
@@ -60,9 +70,11 @@ CREATE DATABASE taller3_db;
 
 Para salir de psql se hace escribiendo `\q` (o ctrl + c en la terminal) y presionando Enter.
 
-### 4. Configurar las variables de entorno
+### 5. Configurar las variables de entorno
 
-En la raíz del proyecto, crea un archivo llamado `.env`. Dentro de ese archivo, escribe:
+**IMPORTANTE**: El archivo `.env` debe estar dentro de la carpeta `taller3/`, no en la raíz del repositorio.
+
+Dentro de la carpeta `taller3/`, crea un archivo llamado `.env`. Dentro de ese archivo, escribe:
 
 ```
 DATABASE_URL="postgresql://usuario:password@localhost:5432/taller3_db?schema=public"
@@ -79,9 +91,9 @@ Por ejemplo, si tu usuario es `postgres`, tu contraseña es `mipassword123` y la
 DATABASE_URL="postgresql://postgres:mipassword123@localhost:5432/taller3_db?schema=public"
 ```
 
-### 5. Ejecutar las migraciones de Prisma
+### 6. Ejecutar las migraciones de Prisma
 
-Prisma necesita crear las tablas en la base de datos. Ejecuta:
+Desde la carpeta `taller3/`, Prisma necesita crear las tablas en la base de datos. Ejecuta:
 
 ```bash
 npx prisma migrate dev
@@ -89,11 +101,11 @@ npx prisma migrate dev
 
 Te pedirá un nombre para la migración, puedes poner cualquier cosa como "init" o simplemente presionar Enter para usar el nombre por defecto.
 
-IMPORTANTE: Si no ejecutan npx prisma generate, el cliente de Prisma no se genera y al intentar usarlo se produce un error que resulta en un error HTTP 500.
+**Nota**: El comando `prisma migrate dev` automáticamente ejecuta `prisma generate` para generar el cliente de Prisma. Si por alguna razón necesitas regenerar el cliente manualmente, puedes ejecutar `npx prisma generate`.
 
-### 6. Poblar la base de datos con datos de ejemplo
+### 7. Poblar la base de datos con datos de ejemplo
 
-Para que puedas ver algo en el dashboard, necesitas datos. El proyecto incluye un script que crea 50 ventas de ejemplo:
+Para que puedas ver algo en el dashboard, necesitas datos. Desde la carpeta `taller3/`, ejecuta:
 
 ```bash
 npx prisma db seed
@@ -103,7 +115,7 @@ Esto creará ventas aleatorias con diferentes categorías, regiones, montos y fe
 
 ## Ejecutar la aplicación
 
-Una vez que hayas completado todos los pasos anteriores, puedes ejecutar la aplicación en modo desarrollo:
+Una vez que hayas completado todos los pasos anteriores, desde la carpeta `taller3/`, ejecuta la aplicación en modo desarrollo:
 
 ```bash
 npm run dev
@@ -125,7 +137,7 @@ En la pestaña "Dashboard" puedes ver:
 - **Gráfico de Área**: Muestra el crecimiento acumulado de las ventas
 - **Gráfico Radar**: Muestra métricas generales como ticket promedio, transacciones, etc.
 
-Puedes filtrar los datos usando los selectores de "Región" y "Categoría" que están arriba de los gráficos. Los gráficos se actualizan automáticamente cuando cambias los filtros.
+Puedes filtrar los datos usando los selectores de "Región", "Categoría", "Fecha Inicio" y "Fecha Fin" que están arriba de los gráficos. Los gráficos se actualizan automáticamente cuando cambias los filtros. Puedes usar los filtros de forma independiente o combinarlos.
 
 ### Gestión de Ventas
 
@@ -163,6 +175,8 @@ Si quieres entender cómo está organizado el código:
 
 ## Comandos útiles
 
+**Nota**: Todos estos comandos deben ejecutarse desde la carpeta `taller3/`.
+
 ```bash
 # Ejecutar en modo desarrollo
 npm run dev
@@ -184,7 +198,7 @@ npx prisma generate
 
 ### Error: "Missing required environment variable: DATABASE_URL"
 
-Asegúrate de haber creado el archivo `.env` en la raíz del proyecto con la variable `DATABASE_URL` correctamente configurada.
+Asegúrate de haber creado el archivo `.env` dentro de la carpeta `taller3/` (no en la raíz del repositorio) con la variable `DATABASE_URL` correctamente configurada.
 
 ### Error al conectar con PostgreSQL
 
@@ -196,7 +210,7 @@ Verifica que:
 
 ### Los gráficos no se muestran o están vacíos
 
-Ejecuta el seed de la base de datos con `npx prisma db seed` para crear datos de ejemplo.
+Desde la carpeta `taller3/`, ejecuta el seed de la base de datos con `npx prisma db seed` para crear datos de ejemplo.
 
 ### El puerto 3000 está ocupado
 
