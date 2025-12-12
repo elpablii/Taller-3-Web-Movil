@@ -31,7 +31,6 @@ export default function DashboardCharts() {
         return <div className="p-8 text-center text-red-500">Error: {error}</div>;
     }
 
-    // Transform Data
     const dataByCategory = groupByCategory(items);
     const dataByDate = groupByDate(items);
     const dataByRegion = groupByRegion(items);
@@ -41,7 +40,7 @@ export default function DashboardCharts() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
 
-            {/* 1. Bar Chart - Sales by Category */}
+            {/* 1. Gráfico de barras - Ventas por Categoría */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Ventas por Categoría (Barras)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -56,7 +55,7 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 2. Line Chart - Sales Over Time */}
+            {/* 2. Gráfico de Lineas - Evolución Temporal */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Evolución Temporal (Líneas)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -71,7 +70,7 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 3. Pie Chart - Sales by Region */}
+            {/* 3. Gráfico Circular - Distribución por Región */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Distribución por Región (Torta)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -95,7 +94,7 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 4. Area Chart - Cumulative Growth */}
+            {/* 4. Gráfico de Área - Crecimiento Acumulado */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Crecimiento Acumulado (Área)</h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -109,7 +108,7 @@ export default function DashboardCharts() {
                 </ResponsiveContainer>
             </div>
 
-            {/* 5. Radar Chart - Metrics Comparison */}
+            {/* 5. Gráfico de radar - Métricas Generales */}
             <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100 md:col-span-2 lg:col-span-2">
                 <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">Métricas Generales (Radar)</h3>
                 <div className="h-[400px]">

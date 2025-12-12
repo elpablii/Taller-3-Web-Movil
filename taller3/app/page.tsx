@@ -18,7 +18,7 @@ export default function Home() {
           </p>
         </header>
 
-        {/* Dashboard Content */}
+        {/*Contenido del Dashboard*/}
         <FilterBar />
         <div className="bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-200">
           <DashboardCharts />

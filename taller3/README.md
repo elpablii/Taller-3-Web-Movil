@@ -1,3 +1,8 @@
+Pablo Villarroel - 21.239.259-6
+Sebastián Pleticosic - 19.307.465-0
+Diego Véliz - 20.797.904-K
+Vicente Araya - 20.797.409-9
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

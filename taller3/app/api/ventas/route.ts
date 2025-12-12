@@ -4,7 +4,6 @@ import { prisma } from '@/lib/prisma';
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const region = searchParams.get('region');
-    // Aquí puedes capturar más filtros
 
     const whereClause = region ? { region } : {};
 

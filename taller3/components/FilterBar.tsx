@@ -8,7 +8,6 @@ export default function FilterBar() {
     const dispatch = useAppDispatch();
     const filters = useAppSelector((state) => state.filters);
 
-    // Lists for dropdowns (could be dynamic, but static is fine for now)
     const regions = ['Norte', 'Centro', 'Sur', 'Metropolitana'];
     const categories = ['Electrónica', 'Ropa', 'Hogar', 'Deportes'];
 
@@ -31,7 +30,7 @@ export default function FilterBar() {
     return (
         <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-4 items-center justify-between">
             <div className="flex flex-wrap gap-4 items-center">
-                {/* Region Filter */}
+                {/* Filtro por Región*/}
                 <div className="flex flex-col">
                     <label className="text-xs font-semibold text-gray-500 uppercase mb-1">Región</label>
                     <select
@@ -46,7 +45,7 @@ export default function FilterBar() {
                     </select>
                 </div>
 
-                {/* Category Filter */}
+                {/* Filtro por Categoría*/}
                 <div className="flex flex-col">
                     <label className="text-xs font-semibold text-gray-500 uppercase mb-1">Categoría</label>
                     <select
@@ -61,8 +60,6 @@ export default function FilterBar() {
                     </select>
                 </div>
 
-                {/* Date Ranges (Optional implementation for UI, logic needs backend support usually) */}
-                {/* Helper: Backend API currently supports basic filtering, complex date range might need full ISO strings */}
             </div>
 
             {/* Actions */}
