@@ -89,6 +89,8 @@ npx prisma migrate dev
 
 Te pedirá un nombre para la migración, puedes poner cualquier cosa como "init" o simplemente presionar Enter para usar el nombre por defecto.
 
+IMPORTANTE: Si no ejecutan npx prisma generate, el cliente de Prisma no se genera y al intentar usarlo se produce un error que resulta en un error HTTP 500.
+
 ### 6. Poblar la base de datos con datos de ejemplo
 
 Para que puedas ver algo en el dashboard, necesitas datos. El proyecto incluye un script que crea 50 ventas de ejemplo:
