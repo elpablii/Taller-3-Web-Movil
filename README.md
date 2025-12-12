@@ -17,7 +17,7 @@ Vicente Araya - 20.797.409-9
 - Todo esto conectado a una base de datos PostgreSQL
 
 ## Requisitos previos
-
+NOTA: LA SECCIÓN DE ERRORES COMUNES SE ENCUENTRA MÁS ABAJO SI SURGE ALGÚN ERROR AL UTILIZAR COMANDOS PARA PRISMA
 Antes de empezar, necesitas tener instalado:
 
 - Node.js (versión 18 o superior)
@@ -101,9 +101,11 @@ npx prisma migrate dev
 
 Te pedirá un nombre para la migración, puedes poner cualquier cosa como "init" o simplemente presionar Enter para usar el nombre por defecto.
 
-**Nota**: El comando `prisma migrate dev` automáticamente ejecuta `prisma generate` para generar el cliente de Prisma. Si por alguna razón necesitas regenerar el cliente manualmente, puedes ejecutar `npx prisma generate`.
+**Nota**: El comando `prisma migrate dev` automáticamente ejecuta `prisma generate` para generar el cliente de Prisma **solo cuando hay cambios en el schema o migraciones pendientes**. Si el mensaje dice "Already in sync, no schema change or pending migration was found", el cliente puede que no se haya generado automáticamente. En ese caso, ejecuta manualmente `npx prisma generate` antes de continuar con el siguiente paso.
 
 ### 7. Poblar la base de datos con datos de ejemplo
+
+**IMPORTANTE**: Antes de ejecutar el seed, asegúrate de que el cliente de Prisma esté generado. Si ejecutaste `npx prisma migrate dev` en el paso anterior, el cliente ya debería estar generado automáticamente. Si por alguna razón no lo está, ejecuta primero `npx prisma generate`.
 
 Para que puedas ver algo en el dashboard, necesitas datos. Desde la carpeta `taller3/`, ejecuta:
 
@@ -230,7 +232,7 @@ Este error ocurre cuando intentas ejecutar `npx prisma db seed` sin haber genera
 1. Ejecuta primero `npx prisma generate` para generar el cliente de Prisma
 2. Luego ejecuta `npx prisma db seed` nuevamente
 
-**Nota**: Si ejecutaste `npx prisma migrate dev` en el paso 6, el cliente ya debería estar generado. Este error puede ocurrir si ejecutas el seed directamente sin haber ejecutado las migraciones primero, o si cambiaste el schema de Prisma y no regeneraste el cliente.
+**Nota**: Si ejecutaste `npx prisma migrate dev` en el paso 6, el cliente debería estar generado automáticamente. Sin embargo, si el mensaje fue "Already in sync, no schema change or pending migration was found", Prisma puede que no haya generado el cliente automáticamente. En ese caso, ejecuta `npx prisma generate` manualmente. Este error también puede ocurrir si ejecutas el seed directamente sin haber ejecutado las migraciones primero, o si cambiaste el schema de Prisma y no regeneraste el cliente.
 
 ### El puerto 3000 está ocupado
 
