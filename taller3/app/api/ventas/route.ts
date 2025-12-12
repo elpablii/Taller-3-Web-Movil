@@ -4,12 +4,9 @@ import { prisma } from '@/lib/prisma';
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const region = searchParams.get('region');
-<<<<<<< HEAD
     const categoria = searchParams.get('categoria');
     const fechaInicio = searchParams.get('fechaInicio');
     const fechaFin = searchParams.get('fechaFin');
-=======
->>>>>>> main
 
     const whereClause: any = {};
     if (region) whereClause.region = region;
